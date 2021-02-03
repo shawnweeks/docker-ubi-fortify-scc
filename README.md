@@ -18,7 +18,7 @@ docker build \
 
 ### Push
 ```shell    
-docker push ${REGISTRY/fortify-ssc
+docker push ${REGISTRY}/fortify/ssc
 ```
 
 ### Run
