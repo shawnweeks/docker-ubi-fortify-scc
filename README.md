@@ -9,7 +9,7 @@ wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/${MYSQL_CONNECTOR
 ### Build
 ```shell
 docker build \
-    -t ${REGISTRY}/fortify-ssc:${FORTIFY_SSC_VERSION} \
+    -t ${REGISTRY}/fortify/ssc:${FORTIFY_SSC_VERSION} \
     --build-arg REGISTRY=${REGISTRY} \
     --build-arg FORTIFY_SSC_VERSION=${FORTIFY_SSC_VERSION} \
     --build-arg MYSQL_CONNECTOR_VERSION=${MYSQL_CONNECTOR_VERSION} \
@@ -27,5 +27,5 @@ docker run -it --rm --init \
     --name=fortify-ssc \
     -v fortify-data:/opt/tomcat/.fortify \
     -p 8080:8080 \
-    ${REGISTRY}/fortify-ssc:${FORTIFY_SSC_VERSION}
+    ${REGISTRY}/fortify/ssc:${FORTIFY_SSC_VERSION}
 ```
