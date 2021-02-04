@@ -12,7 +12,6 @@ docker build \
     -t ${REGISTRY}/fortify/ssc:${FORTIFY_SSC_VERSION} \
     --build-arg REGISTRY=${REGISTRY} \
     --build-arg FORTIFY_SSC_VERSION=${FORTIFY_SSC_VERSION} \
-    --build-arg MYSQL_CONNECTOR_VERSION=${MYSQL_CONNECTOR_VERSION} \
     .
 ```
 
@@ -25,7 +24,7 @@ docker push ${REGISTRY}/fortify/ssc
 ```shell
 docker run -it --rm --init \
     --name=fortify-ssc \
-    -v fortify-data:/opt/tomcat/.fortify \
+    -v fortify \
     -p 8080:8080 \
     ${REGISTRY}/fortify/ssc:${FORTIFY_SSC_VERSION}
 ```
