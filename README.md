@@ -1,9 +1,6 @@
 ### Configure
 ```shell
 export FORTIFY_SSC_VERSION=20.2.0
-export MYSQL_CONNECTOR_VERSION=8.0.23
-
-wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/${MYSQL_CONNECTOR_VERSION}/mysql-connector-java-${MYSQL_CONNECTOR_VERSION}.jar
 ```
 
 ### Build
