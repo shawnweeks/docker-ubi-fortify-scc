@@ -18,8 +18,16 @@ FROM ${REGISTRY}/apache/tomcat:${TOMCAT_VERSION}
 ARG MYSQL_CONNECTOR_VERSION
 ARG MYSQL_CONNECTOR_JAR=mysql-connector-java-${MYSQL_CONNECTOR_VERSION}.jar
 
-COPY --chown=1001:1001 [ "${MYSQL_CONNECTOR_JAR}", "${TOMCAT_HOME}/lib/" ]
+USER root
 
-COPY --from=build --chown=1001:1001 [ "/tmp/ssc.war", "${TOMCAT_HOME}/webapps/fortify.war" ]
+# Required by Fortify for Report Generation
+RUN yum install -y fontconfig && \
+    yum clean all
+
+COPY --chown=${TOMCAT_USER}:${TOMCAT_GROUP} [ "${MYSQL_CONNECTOR_JAR}", "${TOMCAT_HOME}/lib/" ]
+
+COPY --from=build --chown=${TOMCAT_USER}:${TOMCAT_GROUP} [ "/tmp/ssc.war", "${TOMCAT_HOME}/webapps/fortify.war" ]
+
+USER ${TOMCAT_USER}
 
 RUN mkdir -p ${TOMCAT_HOME}/.fortify
