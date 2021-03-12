@@ -1,6 +1,6 @@
 ARG REGISTRY
 ARG REDHAT_VERSION=8.3
-ARG TOMCAT_VERSION=9.0.41
+ARG TOMCAT_VERSION
 
 FROM ${REGISTRY}/redhat/ubi/ubi8:${REDHAT_VERSION} as build
 
@@ -21,7 +21,10 @@ USER root
 RUN yum install -y fontconfig && \
     yum clean all
 
-COPY --from=build --chown=${TOMCAT_USER}:${TOMCAT_GROUP} [ "/tmp/ssc.war", "${TOMCAT_HOME}/webapps/fortify.war" ]
+COPY --from=build --chown=root:${TOMCAT_GROUP} [ "/tmp/ssc.war", "${TOMCAT_INSTALL_DIR}/webapps/fortify.war" ]
+COPY --chown=root:${TOMCAT_GROUP} [ "catalina.policy", "${TOMCAT_INSTALL_DIR}/conf/" ]
+
+RUN chmod 644 ${TOMCAT_INSTALL_DIR}/conf/catalina.policy
 
 USER ${TOMCAT_USER}
 

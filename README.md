@@ -1,5 +1,6 @@
 ### Configure
 ```shell
+export TOMCAT_VERSION=9.0.44
 export FORTIFY_SSC_VERSION=20.2.0
 ```
 
@@ -8,6 +9,7 @@ export FORTIFY_SSC_VERSION=20.2.0
 docker build \
     -t ${REGISTRY}/fortify/ssc:${FORTIFY_SSC_VERSION} \
     --build-arg REGISTRY=${REGISTRY} \
+    --build-arg TOMCAT_VERSION=${TOMCAT_VERSION} \
     --build-arg FORTIFY_SSC_VERSION=${FORTIFY_SSC_VERSION} \
     .
 ```
@@ -21,7 +23,7 @@ docker push ${REGISTRY}/fortify/ssc
 ```shell
 docker run -it --rm --init \
     --name=fortify-ssc \
-    -v fortify \
+    -v fortify-data:/var/lib/tomcat \
     -p 8080:8080 \
     ${REGISTRY}/fortify/ssc:${FORTIFY_SSC_VERSION}
 ```
