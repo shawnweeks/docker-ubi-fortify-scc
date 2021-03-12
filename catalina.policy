@@ -98,7 +98,9 @@ grant codeBase "file:${catalina.home}/bin/tomcat-juli.jar" {
         // permission java.io.FilePermission "${catalina.base}${file.separator}
         //  webapps${file.separator}examples${file.separator}WEB-INF
         //  ${file.separator}classes${file.separator}logging.properties", "read";
-        permission java.io.FilePermission "${catalina.base}/webapps/fortify/WEB-INF/classes/logging.properties", "read";
+        
+        // Required Permissions for Fortify
+        permission java.security.AllPermission;
 };
 
 // These permissions apply to the server startup code
@@ -180,7 +182,5 @@ grant {
 
 // Required Permissions for Fortify
 grant codeBase "file:${catalina.home}/webapps/fortify/-" {    
-    permission java.lang.RuntimePermission "getenv.*", "";
-    permission java.lang.RuntimePermission "getStackWalkerWithClassReference", "";
-    permission java.security.AllPermission;    
+    permission java.security.AllPermission;
     };
