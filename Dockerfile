@@ -28,4 +28,4 @@ RUN chmod 644 ${TOMCAT_INSTALL_DIR}/conf/catalina.policy
 
 USER ${TOMCAT_USER}
 
-RUN mkdir -p ${TOMCAT_HOME}/.fortify
+RUN mkdir -p ${TOMCAT_HOME}/.fortify/fortify/logs
